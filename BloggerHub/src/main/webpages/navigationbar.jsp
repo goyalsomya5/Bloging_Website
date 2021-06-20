@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark primary-background">
-	<a class="navbar-brand" href=""><span class = "fa fa-hand-o-right fa-lg"></span>Blogger Hub</a>
+	<a class="navbar-brand" href="index.jsp"><span class = "fa fa-hand-o-right fa-lg"></span>Blogger Hub</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -9,10 +9,6 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="#">Home
-					<span class="sr-only">(current)</span>
-			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="#">Start Writing</a></li>
 			<li class="nav-item active dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -25,6 +21,8 @@
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#">Other</a>
 				</div></li>
+			<li class="nav-item active"><a class="nav-link" href="register.jsp">Start Writing</a></li>
+			<li class="nav-item active"><a class="nav-link" href="login.jsp">Login</a></li>
 			<li class="nav-item active"><a class="nav-link" href="#">Contact</a>
 			</li>
 		</ul>

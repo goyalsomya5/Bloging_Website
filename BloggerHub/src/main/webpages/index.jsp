@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>index page</title>
+<title>Blogger Hub</title>
 
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -19,7 +19,7 @@
 	crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color:#f3e5f5">
 	<!-- navigation bar -->
 	<%@ include file="navigationbar.jsp"%>
 
