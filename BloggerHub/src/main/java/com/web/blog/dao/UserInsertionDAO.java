@@ -23,9 +23,8 @@ public class UserInsertionDAO {
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getPassword());
 			pstmt.setString(6, user.getAbout());
-			System.out.println(user.getAbout());
-			pstmt.executeUpdate();
 			
+			pstmt.executeUpdate();
 			f = true;
 		} catch (Exception e) {
 			e.printStackTrace();

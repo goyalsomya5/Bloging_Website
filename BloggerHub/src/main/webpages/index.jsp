@@ -29,9 +29,11 @@
 		<div class="container">
 			<h3 class="display-4">Welcome To Blogger Hub!</h3>
 			<p>A perfect place for writing your blogs.</p>
+			<a href = "register.jsp">
 			<button class="btn btn-outline-light my-2 my-sm-0">Start
-				Writing!</button>
-			<button class="btn btn-outline-light my-2 my-sm-0">Login</button>
+				Writing!</button></a>
+			<a href = "login.jsp">
+			<button class="btn btn-outline-light my-2 my-sm-0">Login</button></a>
 		</div>
 	</div>
 

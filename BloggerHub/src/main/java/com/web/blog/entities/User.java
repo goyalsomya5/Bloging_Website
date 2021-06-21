@@ -1,5 +1,9 @@
 package com.web.blog.entities;
 
+import java.security.NoSuchAlgorithmException;
+
+import com.web.blog.helpers.Encryptor;
+
 public class User {
 	private int id;
 	private String First_Name;
@@ -26,17 +30,25 @@ public class User {
 		super();
 	}
 
-	public User(String first_Name, String last_Name, String gender, String email, String password, String about) {
+	public User(String first_Name, String last_Name, String gender, String email, String password, String about) throws NoSuchAlgorithmException {
 		super();
 		First_Name = first_Name;
 		Last_Name = last_Name;
 		Gender = gender;
 		Email = email;
-		Password = password;
+		Password = Encryptor.Hash(password);
 		About = about;
+		if(About.length() == 0)
+		About = "Hey! I am a Blogger.";
 	}
 
-//	Getters And Setters
+public User(String email, String password) throws Exception {
+		super();
+		Email = email;
+		Password = Encryptor.Hash(password);
+	}
+
+	//	Getters And Setters
 	public int getId() {
 		return id;
 	}

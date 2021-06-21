@@ -2,6 +2,8 @@ package com.web.blog.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,47 +22,63 @@ import com.web.blog.helpers.Connector;
 @MultipartConfig
 public class UserInsertionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-    
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	response.setContentType("text/html;charset=UTF-8");
-   
-    	try(PrintWriter out = response.getWriter()){
-    		String check = request.getParameter("check");
-    		System.out.println(check);
-    		if(check == null)
-    			out.print("box not checked");
-    		else {
-    			String First_Name = request.getParameter("F_Name");
-    			String Last_Name  = request.getParameter("L_Name");
-    			String Gender = request.getParameter("Gender");
-    			String Email = request.getParameter("Email");
-    			String Password = request.getParameter("Password");
-    			String About = request.getParameter("About");
-    			
+
+	public void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, NoSuchAlgorithmException {
+		response.setContentType("text/html;charset=UTF-8");
+
+		try (PrintWriter out = response.getWriter()) {
+			String check = request.getParameter("check");
+			System.out.println(check);
+			if (check == null)
+				out.print("Please agree to the terms and conditions.");
+			else {
+				String First_Name = request.getParameter("F_Name");
+				String Last_Name = request.getParameter("L_Name");
+				String Gender = request.getParameter("Gender");
+				String Email = request.getParameter("Email");
+				String Password = request.getParameter("Password");
+				String About = request.getParameter("About");
+
+				if (First_Name.length() == 0 || Last_Name.length() == 0 || Password.length() == 0
+						|| Email.length() == 0)
+					out.println("Please fill all the details correctly !");
+				else {
 //    			Creating an instance of User to Store in the Database getting all the entities.
-    			
-    			User user = new User(First_Name, Last_Name, Gender, Email, Password, About);
-    			
+
+					User user = new User(First_Name, Last_Name, Gender, Email, Password, About);
+
 //    			Creating an Instance of Data Insertion Class UserInsetionDao using a new connection instance from helpers - "Connector" method.
-    			
-    			UserInsertionDAO dao = new UserInsertionDAO(Connector.getConnection());
-    			if(dao.insertUser(user))
-    				out.println("done");
-    			else
-    				out.println("error");
-    		}
-    	}
-    }
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
+
+					UserInsertionDAO dao = new UserInsertionDAO(Connector.getConnection());
+					if (dao.insertUser(user))
+						out.println("done");
+					else
+						out.println(Email + "\n  An account with this email address already exists!");
+				}
+			}
+		}
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			processRequest(request, response);
+		} catch (NoSuchAlgorithmException | ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		processRequest(request, response);
+		try {
+			processRequest(request, response);
+		} catch (NoSuchAlgorithmException | ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
