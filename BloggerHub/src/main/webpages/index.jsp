@@ -10,6 +10,7 @@
 <title>Blogger Hub</title>
 
 <!-- css -->
+
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,9 +20,22 @@
 	crossorigin="anonymous">
 </head>
 
-<body style="background-color:#f3e5f5">
+<body style="background-color: #f3e5f5 !important">
 	<!-- navigation bar -->
 	<%@ include file="navigationbar.jsp"%>
+
+	<!-- Banner -->
+	<div class="jumbotron primary-background text-white">
+		<div class="container">
+			<h3 class="display-4">Welcome To Blogger Hub!</h3>
+			<p>A perfect place for writing your blogs.</p>
+			<button class="btn btn-outline-light my-2 my-sm-0">Start
+				Writing!</button>
+			<button class="btn btn-outline-light my-2 my-sm-0">Login</button>
+		</div>
+	</div>
+
+
 
 	<%-- java script --%>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"
