@@ -33,10 +33,10 @@ public class LoginServlet extends HttpServlet {
 			User user = new User(Email, Password);
 			
 			UserLoginDAO dao = new UserLoginDAO(Connector.getConnection());
-			
-			if (dao.ValidateUser(user)) {
+			user = dao.ValidateUser(user);
+			if (user != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("currentUser", user);
+				session.setAttribute("currentuser", user);
 			}
 				
 			else {

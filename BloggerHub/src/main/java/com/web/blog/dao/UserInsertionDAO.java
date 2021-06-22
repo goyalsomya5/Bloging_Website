@@ -7,6 +7,7 @@ import com.web.blog.entities.User;
 
 public class UserInsertionDAO {
 	private Connection con;
+
 	public UserInsertionDAO(Connection con) {
 		super();
 		this.con = con;
@@ -15,7 +16,7 @@ public class UserInsertionDAO {
 	public boolean insertUser(User user) {
 		boolean f = false;
 		try {
-			String query = "Insert into users(First_Name ,Last_Name ,Gender , Email , Password , About) values(?,?,?,?,?,?)";
+			String query = "Insert into users(First_Name ,Last_Name ,Gender , Email , Password , About , Picture) values(?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = this.con.prepareStatement(query);
 			pstmt.setString(1, user.getFirst_Name());
 			pstmt.setString(2, user.getLast_Name());
@@ -23,7 +24,8 @@ public class UserInsertionDAO {
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getPassword());
 			pstmt.setString(6, user.getAbout());
-			
+			pstmt.setString(7, user.getPicture());
+
 			pstmt.executeUpdate();
 			f = true;
 		} catch (Exception e) {

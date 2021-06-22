@@ -21,6 +21,7 @@ h1 {
 	crossorigin="anonymous">
 </head>
 <body style="background-color: #f3e5f5">
+
 	<!-- navigation bar -->
 	<%@ include file="navigationbar.jsp"%>
 
@@ -43,7 +44,7 @@ h1 {
 			</div>
 			<div class="form-group" align="center">
 				<button id="submit-btn" type="submit" class="btn btn-primary">login
-					</button>
+				</button>
 			</div>
 		</form>
 		<div class="dropdown-divider"></div>
@@ -81,13 +82,18 @@ h1 {
 					success : function(data, textStatus, jqXHR) {
 						console.log(data)
 						if(data.trim() === "error"){
-						swal("Invalid Email Address or Password!");}
+						swal("Invalid Email Address or Password!",{icon:"error",});}
 						else{
-							window.location = "profile.jsp"
+							swal({
+								icon:"success",
+								timer:1350,
+								button:false,
+							}).then((value) =>
+							{window.location = "profile.jsp"});
 						}
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
-						swal("Something went wrong..Please try again!");
+						swal("Something went wrong..Please try again!",{icon:"info",});
 					},
 					processData : false,
 					contentType : false

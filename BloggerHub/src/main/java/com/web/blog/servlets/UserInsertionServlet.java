@@ -46,7 +46,7 @@ public class UserInsertionServlet extends HttpServlet {
 				else {
 //    			Creating an instance of User to Store in the Database getting all the entities.
 
-					User user = new User(First_Name, Last_Name, Gender, Email, Password, About);
+					User user = new User(First_Name, Last_Name, Gender, Email, Password, About , "");
 
 //    			Creating an Instance of Data Insertion Class UserInsetionDao using a new connection instance from helpers - "Connector" method.
 

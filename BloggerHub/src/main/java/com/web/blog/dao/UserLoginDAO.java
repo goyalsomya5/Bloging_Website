@@ -13,25 +13,33 @@ public class UserLoginDAO {
 		super();
 		this.con = con;
 	}
-	public boolean ValidateUser(User user) {
-		boolean f = false;
+
+	public User ValidateUser(User user) {
+		User u = null;
 		try {
-			String query = "Select Password from users where (Email = ?)";
+			String query = "Select * from users where (Email = ?)";
 			PreparedStatement pstmt = this.con.prepareStatement(query);
 			pstmt.setString(1, user.getEmail());
 			ResultSet rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-			System.out.println(rs.getString("Password"));
-			if(rs.getString("Password").equals(user.getPassword()))
-			f = true;}
-			
-		}
-		catch(Exception e) {
+
+			if (rs.next()) {
+
+				System.out.println(rs.getString("Password"));
+				if (rs.getString("Password").equals(user.getPassword())) {
+					u = new User();
+					u.setId(rs.getInt("User_Id"));
+					u.setFirst_Name(rs.getString("First_Name"));
+					u.setLast_Name(rs.getString("Last_Name"));
+					u.setEmail(rs.getString("Email"));
+					u.setAbout(rs.getString("About"));
+					u.setPicture(rs.getString("Picture"));
+				}
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return f;
+		return u;
 	}
-	
 
 }
