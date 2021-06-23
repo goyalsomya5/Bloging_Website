@@ -49,9 +49,11 @@ form {
 		<div class="form-group">
 			<label for="exampleFormControlSelect2">Gender</label> <select
 				class="form-control" id="exampleFormControlSelect2" name="Gender"
-				placeholder="Gender">
-				<option>Male</option>
-				<option>Female</option>
+				required>
+	
+				<option value="">Gender</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
 			</select>
 		</div>
 		<div class="form-group">
@@ -69,6 +71,13 @@ form {
 			<textarea name="About" class="form-control"
 				id="exampleFormControlTextarea1" rows="3"
 				placeholder="Write About Yourself"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="validatedCustomFile">Profile Picture</label> <input
+				name="Picture" type="file" class="form-control"
+				id="validatedCustomFile" placeholder="Choose File(JPEG , PNG , JPG)" accept="image/*">
+		<div class="preview">
+  </div>
 		</div>
 		<div class="form-group">
 			<div class="form-check">

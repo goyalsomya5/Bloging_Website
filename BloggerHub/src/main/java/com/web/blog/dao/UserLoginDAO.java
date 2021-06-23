@@ -30,6 +30,7 @@ public class UserLoginDAO {
 					u.setId(rs.getInt("User_Id"));
 					u.setFirst_Name(rs.getString("First_Name"));
 					u.setLast_Name(rs.getString("Last_Name"));
+					u.setGender(rs.getString("Gender"));
 					u.setEmail(rs.getString("Email"));
 					u.setAbout(rs.getString("About"));
 					u.setPicture(rs.getString("Picture"));

@@ -1,6 +1,9 @@
 <%@page import="com.web.blog.entities.User"%>
 <%@page errorPage="error.jsp"%>
 <%
+response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+response.setHeader("Progma", "no-cache");
+response.setHeader("Expiers", "0");
 User user = (User) session.getAttribute("currentuser");
 if (user == null) {
 	response.sendRedirect("login.jsp");
@@ -58,9 +61,9 @@ if (user == null) {
 			</ul>
 			<ul class="navbar-nav mr-right">
 				<li class="nav-item active"><a class="nav-link" href="#!"
-					data-toggle="modal" data-target="#user-info"><span
-						><img src="img/<%=user.getPicture()%>" class="img-fluid"
-						style="border-radius: 50%; max-width: 22px"> <%=user.getFirst_Name()%>
+					data-toggle="modal" data-target="#user-info"><span><img
+							src="img/<%=user.getPicture()%>" class="img-fluid"
+							style="border-radius: 50%; max-width: 22px"> <%=user.getFirst_Name()%>
 					</span></a></li>
 			</ul>
 			<ul class="navbar-nav mr-right">
@@ -84,7 +87,7 @@ if (user == null) {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="container text-center " style="margin:15px 15px">
+				<div class="container text-center " style="margin: 15px 15px">
 					<img src="img/<%=user.getPicture()%>" class="img-fluid"
 						style="border-radius: 50%; max-width: 120px"> <br>
 				</div>
@@ -121,7 +124,7 @@ if (user == null) {
 				</div>
 			</div>
 		</div>
-	
+
 	</div>
 
 	<!-- JavaScript -->
