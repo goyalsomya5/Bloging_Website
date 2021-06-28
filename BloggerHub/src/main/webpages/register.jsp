@@ -1,3 +1,14 @@
+<%@page import="com.web.blog.entities.User"%>
+<%@page errorPage="error.jsp"%>
+<%
+response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+response.setHeader("Progma", "no-cache");
+response.setHeader("Expires", "0");
+User u = (User) session.getAttribute("currentuser");
+if (u != null) {
+	response.sendRedirect("profile.jsp");
+}
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -50,7 +61,7 @@ form {
 			<label for="exampleFormControlSelect2">Gender</label> <select
 				class="form-control" id="exampleFormControlSelect2" name="Gender"
 				required>
-	
+
 				<option value="">Gender</option>
 				<option value="Male">Male</option>
 				<option value="Female">Female</option>
@@ -75,9 +86,9 @@ form {
 		<div class="form-group">
 			<label for="validatedCustomFile">Profile Picture</label> <input
 				name="Picture" type="file" class="form-control"
-				id="validatedCustomFile" placeholder="Choose File(JPEG , PNG , JPG)" accept="image/*">
-		<div class="preview">
-  </div>
+				id="validatedCustomFile" placeholder="Choose File(JPEG , PNG , JPG)"
+				accept="image/*">
+
 		</div>
 		<div class="form-group">
 			<div class="form-check">

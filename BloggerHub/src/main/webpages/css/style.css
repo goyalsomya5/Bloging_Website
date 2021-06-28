@@ -1,4 +1,28 @@
+.primary-background {
+	background: #e040fb !important;
+}
 
-.primary-background{
-	background:#e040fb!important;
+.but{
+  margin-top: 50px !important;
+}
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  left : 58%;
+  background-color:  #f3e5f5;
+  text-align: center;
+  border-radius: 6px;
+  padding: 50px 50px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 5;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

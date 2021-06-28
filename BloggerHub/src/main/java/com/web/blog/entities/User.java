@@ -107,7 +107,9 @@ public User(String email, String password) throws Exception {
 	}
 
 	public void setAbout(String about) {
-		About = about;
+		if(about.length() == 0)
+			About = "Hey! I am a Blogger.";
+		else About = about;
 	}
 
 	public String getPicture() {

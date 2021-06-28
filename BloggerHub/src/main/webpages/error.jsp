@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p style="text-align: center;font-size:40px">
-		<img alt="" src="img/error.jpeg" style="margin:50px 50px"><br>
+	<p style="text-align: center; font-size: 40px">
+		<img alt="" src="img/error.jpeg" style="margin: 50px 50px"><br>
 		<b>Please Try Again Later!</b>
 	</p>
 </body>

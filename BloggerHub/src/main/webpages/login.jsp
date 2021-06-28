@@ -1,3 +1,13 @@
+<%@page import="com.web.blog.entities.User"%>
+<%@page errorPage="error.jsp"%>
+<%
+response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+response.setHeader("Progma", "no-cache");
+User u = (User) session.getAttribute("currentuser");
+if (u != null) {
+	response.sendRedirect("profile.jsp");
+}
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>

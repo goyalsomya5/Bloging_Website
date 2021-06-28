@@ -68,7 +68,9 @@ public class UserInsertionServlet extends HttpServlet {
 						byte[] data = new byte[is.available()];
 						
 						is.read(data);
-						String path = request.getRealPath("/") + "img" + File.separator + Filename;
+//						request.get
+						String path =  getServletContext().getRealPath("/") + "img" + File.separator + Filename;
+						System.out.println(path);
 						
 						FileOutputStream fos = new FileOutputStream(path);
 						

@@ -1,5 +1,9 @@
-
 <%@page import="com.web.blog.helpers.Connector"%>
+<%
+response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
+response.setHeader("Progma", "no-cache");
+ User u = (User)session.getAttribute("currentuser");
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*"%>
@@ -29,11 +33,12 @@
 		<div class="container">
 			<h3 class="display-4">Welcome To Blogger Hub!</h3>
 			<p>A perfect place for writing your blogs.</p>
-			<a href = "register.jsp">
-			<button class="btn btn-outline-light my-2 my-sm-0">Start
-				Writing!</button></a>
-			<a href = "login.jsp">
-			<button class="btn btn-outline-light my-2 my-sm-0">Login</button></a>
+			<a href="register.jsp">
+				<button class="btn btn-outline-light my-2 my-sm-0">Start
+					Writing!</button>
+			</a> <a href="login.jsp">
+				<button class="btn btn-outline-light my-2 my-sm-0">Login</button>
+			</a>
 		</div>
 	</div>
 

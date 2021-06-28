@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 			
 			UserLoginDAO dao = new UserLoginDAO(Connector.getConnection());
 			user = dao.ValidateUser(user);
-			System.out.print(user.getGender());
+//			System.out.print(user.getGender());
 			if (user != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("currentuser", user);

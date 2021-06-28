@@ -24,12 +24,12 @@ public class UserLoginDAO {
 
 			if (rs.next()) {
 
-				System.out.println(rs.getString("Password"));
 				if (rs.getString("Password").equals(user.getPassword())) {
 					u = new User();
 					u.setId(rs.getInt("User_Id"));
 					u.setFirst_Name(rs.getString("First_Name"));
 					u.setLast_Name(rs.getString("Last_Name"));
+					u.setPassword(rs.getString("Password"));
 					u.setGender(rs.getString("Gender"));
 					u.setEmail(rs.getString("Email"));
 					u.setAbout(rs.getString("About"));
