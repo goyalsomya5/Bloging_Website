@@ -52,17 +52,17 @@ public class UserEditServlet extends HttpServlet {
 			String oldpic = user.getPicture();
 			user.setFirst_Name(F_name);
 			user.setLast_Name(L_Name);
-			System.out.println("*	"+About+"	*	" + filename + "	*	" + oldpic);
 			if (!user.getPassword().equals(Password))
 				user.setPassword(Encryptor.Hash(Password));
 			if (Gender != null)
 				user.setGender(Gender);
-				user.setAbout(About);
+			user.setAbout(About);
 			if (!oldpic.equals(filename) && filename.length() != 0)
-				user.setPicture(filename);	
-				user.setAbout(About);
+				user.setPicture(filename);
+			user.setAbout(About);
 			System.out.println(user.getFirst_Name() + " * " + user.getLast_Name() + " * " + user.getEmail() + " * "
-					+ user.getPassword() + " * " + user.getGender() + " * " + " " + user.getPicture()+" * "+user.getAbout());
+					+ user.getPassword() + " * " + user.getGender() + " * " + " " + user.getPicture() + " * "
+					+ user.getAbout());
 			UserEditDAO dao = new UserEditDAO(Connector.getConnection());
 			if (dao.editUser(user)) {
 				if (!oldpic.equals(filename) && filename.length() != 0) {

@@ -31,6 +31,7 @@ User user = (User) session.getAttribute("currentuser");
 					<%
 					CategoriesDAO dao = new CategoriesDAO(Connector.getConnection());
 					ArrayList<Category> categories = dao.getCategories();
+					session.setAttribute("categories", categories);
 					for (Category c : categories) {
 						if (!c.getCname().equals("Other")) {
 					%>
@@ -151,11 +152,11 @@ if (user != null) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputState">Gender</label> <select id="Gender"
+						<label for="inputState">Gender</label> <select id="Gender" value = ""
 							name="Gender" class="form-control" required>
-							<option value=null selected disabled>Choose...</option>
-							<option value="Female">Female</option>
-							<option value="Male">Male</option>
+							<option value="" disabled>Choose...</option>
+							<option value="Female" <%if(user.getGender().equals("Female")){%> selected<%}%>>Female</option>
+							<option value="Male"<%if(user.getGender().equals("Male")){%> selected<%}%>>Male</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -180,13 +181,13 @@ if (user != null) {
 							value="<%=user.getPicture()%>">
 					</div>
 					<div class="text-center">
-						<button id="saveChanges" type="submit" class="btn btn-primary"
+						<button id="saveChanges" type="submit" class="btn btn-outline-light primary-background"
 							style="margin-bottom: 5px;">Save Changes</button>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" id="btn" class="btn btn-primary">Edit</button>
+				<button type="submit" id="btn" class="btn btn-outline-light primary-background">Edit</button>
 				<!--  <button type="button" class="btn btn-primary">Save changes</button>-->
 			</div>
 		</div>

@@ -5,24 +5,22 @@
 .but{
   margin-top: 50px !important;
 }
-.tooltip {
-  position: relative;
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+}
+body {
+	background-color: #3498db;
+	color: #ecf0f1;
 }
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  left : 58%;
-  background-color:  #f3e5f5;
-  text-align: center;
-  border-radius: 6px;
-  padding: 50px 50px;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 5;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
 }
