@@ -3,11 +3,12 @@
 <%
 response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
 response.setHeader("Progma", "no-cache");
-response.setHeader("Expires", "0");
+
 User u = (User) session.getAttribute("currentuser");
 if (u == null) {
 	response.sendRedirect("login.jsp");
 }
+session.setAttribute("postuser", u);
 %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -48,6 +49,7 @@ if (u == null) {
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
+						
 					</button>
 				</div>
 				<div class="container-fluid">
@@ -76,8 +78,8 @@ if (u == null) {
 
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">Blog Content</label>
-							<textarea class="form-control" id="BlogContent" name="BlogContent"
-								rows="7" required></textarea>
+							<textarea class="form-control" id="BlogContent"
+								name="BlogContent" rows="7" required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="inputPassword4">Blog Picture</label> <input
@@ -101,26 +103,28 @@ if (u == null) {
 			style="font-size: 50px; text-color: white; margin-top: 50px; margin-left: 50px;">Your
 			Blog's :</h1>
 		<hr>
-		</div>
-		
-	
+	</div>
+
+	<!-- User Posts -->
+	<%@ include file="posts.jsp"%>
+
 	<!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-<script src="js/js.js" type="text/javascript"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script src="js/js.js" type="text/javascript"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<script>
             $(document).ready(function () {
                 console.log("loaded........")
                 $('#post-blog').on('submit', function (event) {

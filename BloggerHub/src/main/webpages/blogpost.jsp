@@ -1,24 +1,23 @@
-<%@page import="com.web.blog.entities.Post"%>
+
 <%@page import="com.web.blog.dao.FetchBlogsDAO"%>
-<%@page import="com.web.blog.helpers.Connector"%>
+<%@page import="com.web.blog.entities.Post"%>
 <%
-response.setHeader("Cache-Control", "no-cache , no-store, must-revalidate");
-response.setHeader("Progma", "no-cache");
-User u = (User) session.getAttribute("currentuser");
-session.setAttribute("postuser", null);
-session.setAttribute("category", null);
+int Post_id = Integer.parseInt(request.getParameter("pid"));
+ArrayList<Category> cts = (ArrayList<Category>) session.getAttribute("categories");
+FetchBlogsDAO postdao = new FetchBlogsDAO(Connector.getConnection());
+
+Post p = postdao.fetchpost(Post_id);
+p.setCname(cts.get(p.getCid() - 1).getCname());
 %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Blogger Hub</title>
-
+<title>Insert title here</title>
 <!-- css -->
-
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,34 +26,57 @@ session.setAttribute("category", null);
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 </head>
-
-<body style="background-color: #f3e5f5 !important">
-	<!-- navigation bar -->
+<body>
 	<%@ include file="navigationbar.jsp"%>
 
-	<!-- Banner -->
-	<div class="jumbotron primary-background text-white"
-		style="border-radius: 0%;">
-		<div class="container">
-			<h3 class="display-4">Welcome To Blogger Hub!</h3>
-			<p>A perfect place for writing your blogs.</p>
-			<a href="register.jsp">
-				<button class="btn btn-outline-light my-2 my-sm-0">Start
-					Writing!</button>
-			</a> <%if(user == null){ %>
-			<a href="login.jsp">
-			
-				<button class="btn btn-outline-light my-2 my-sm-0">Login</button>
-			</a>
-			<%} %>
+	<div class="container-fluid">
+		<%
+		if (p.getPicture() != null) {
+		%>
+		<br> 
+		<br>
+		<div class="col-sm-3">
+			<img alt="" src="img/<%=p.getPicture()%>"
+				style="padding-left: 100px; padding-right: 100px; width: 300px; float: left;" />
+
 		</div>
+		<br> <br>
+		<%
+		}
+		%>
+		<div class="col">
+			<h2 class="display-4"><%=p.getTitle()%>
+			</h2>
+			<hr>
+			<h5>
+				<span class="fa fa-clock-o"></span> Posted by
+				<%=p.getAuthor()%>,
+				<%=p.getRegdate()%></h5>
+			<h5>
+				<span class="label label-danger">Category : <%=p.getCname()%></span>
+			</h5>
+			<br>
+			<p>
+				<%=p.getContent()%></p>
+		</div>
+
 	</div>
 
-	<!-- Blog Posts -->
-	<!--  --><%@ include file="posts.jsp"%>
 
 
-	<%-- java script --%>
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Java Script -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script
@@ -76,8 +98,8 @@ session.setAttribute("category", null);
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"
-		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -87,7 +109,9 @@ session.setAttribute("category", null);
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
-
+	<script src="js/js.js" type="text/javascript"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 </body>
-
 </html>

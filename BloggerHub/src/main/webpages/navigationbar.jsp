@@ -35,12 +35,12 @@ User user = (User) session.getAttribute("currentuser");
 					for (Category c : categories) {
 						if (!c.getCname().equals("Other")) {
 					%>
-					<a class="dropdown-item" href="#"><%=c.getCname()%></a>
+					<a class="dropdown-item" href="category.jsp?cid=<%=c.getCid()%>"><%=c.getCname()%></a>
 					<%
 					} else {
 					%>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#"><%=c.getCname()%></a>
+					<a class="dropdown-item" href="category.jsp?cid=<%=c.getCid()%>"><%=c.getCname()%></a>
 					<%
 					}
 					}
@@ -197,6 +197,10 @@ if (user != null) {
 
 
 <!-- JavaScript -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"></link>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>

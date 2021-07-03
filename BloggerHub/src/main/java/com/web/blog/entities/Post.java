@@ -15,6 +15,7 @@ public class Post {
 	private String author;
 	private String regdate;
 	private String cname;
+	private String Authoremail;
 
 	public Post() {
 		super();
@@ -114,6 +115,14 @@ public class Post {
 
 	public void setCname(String cname) {
 		this.cname = cname;
+	}
+
+	public String getAuthoremail() {
+		return Authoremail;
+	}
+
+	public void setAuthoremail(String authoremail) {
+		Authoremail = authoremail;
 	}
 
 }
