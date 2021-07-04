@@ -1,3 +1,4 @@
+<%@page import="com.web.blog.dao.LikeDAO"%>
 <%@page import="com.web.blog.entities.Category"%>
 <%@page import="com.web.blog.entities.User"%>
 <%@page import="com.web.blog.entities.Post"%>
@@ -8,6 +9,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
+User cu = (User) session.getAttribute("currentuser");
 User us = (User) session.getAttribute("postuser");
 Category category = (Category) session.getAttribute("category");
 ArrayList<Post> al = new ArrayList<Post>();
@@ -30,6 +32,7 @@ ArrayList<Post> al = new ArrayList<Post>();
 		al = fdao.fetchpost();
 	ArrayList<Category> ct = (ArrayList<Category>) session.getAttribute("categories");
 	for (Post p : al) {
+		 
 		session.setAttribute("post", p);
 		p.setCateogory(ct.get(p.getCid() - 1).getCname());
 	%>
@@ -52,12 +55,19 @@ ArrayList<Post> al = new ArrayList<Post>();
 			<p class="card-text"><%=p.getContent().substring(0, p.getContent().length() / 3)%>
 				...
 			</p>
-			<a href="#" onclick="dolike(<%=p.getPid() %> , <%= p.getUid() %>)" class="btn btn-outline-light primary-background">Like
-				<span class="fa fa-thumbs-up"></span>
-			</a> <a href="blogpost.jsp?pid=<%=p.getPid()%>"
-				class="btn btn-primary">Read More</a> <a href=""
-				class="btn btn-outline-light primary-background" data-toggle="modal"
-				data-target="#<%=p.getPid()%>">Get Info </a>
+			<%
+			LikeDAO ldao = new LikeDAO(Connector.getConnection());
+			int likes =0;
+			int uid = -1;
+			if (cu != null)
+				uid = cu.getId();
+			%>
+			<a href="#!" onclick="dolike(<%=p.getPid()%> ,<%=uid%>)"
+				class="btn btn-outline-light primary-background">Like <i
+				class="fa fa-thumbs-up"></i><span class="<%=p.getPid()%>"><%= ldao.getLikeCount(p.getPid())%></span>
+			</a> <a href="blogpost.jsp?pid=<%=p.getPid()%>" class="btn btn-primary">Read
+				More</a> <a href="" class="btn btn-outline-light primary-background"
+				data-toggle="modal" data-target="#<%=p.getPid()%>">Get Info </a>
 		</div>
 	</div>
 	<%
@@ -121,10 +131,18 @@ for (Post p : al) {
 	style="position: fixed; bottom: 25px; right: 25px; display: none"
 	role="button"><i class="fa fa-chevron-up"></i></a>
 <%-- java script --%>
-<script src="js/js.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+<script src="js/js.js" type="text/javascript"></script>
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -150,4 +168,52 @@ for (Post p : al) {
 			return false;
 		});
 	});
+</script>
+<
+<script type="text/javascript">
+
+function dolike(pid, uid) {
+	console.log(pid + " , " + uid)
+	if(uid == -1){
+		swal("Please Login First !",{
+        	icon:"warning",
+        	timer:1800,
+        	button:false,})
+                .then((value) => {
+                    window.location = "login.jsp"
+                });}
+	else{
+		const d = {
+		        uid: uid,
+		        pid: pid,
+		        operation: 'like'
+		    }
+		
+		$.ajax({
+	        url: "LikeServlet",
+	        data: d,
+	        success: function (data, textStatus, jqXHR) {
+	            console.log(data); 
+	            let c = $('.'+pid).html();
+	            if (data.trim() == 'liked')
+	            {
+	                c++;$('.'+pid).html(c);
+	            }
+	            else if(data.trim() == 'disliked'){
+	            	c--;$('.'+pid).html(c);
+	            } 
+	        },
+	        error: function (jqXHR, textStatus, errorThrown) {
+	            console.log(data)
+	        }
+	    })
+		
+		
+		
+		
+		
+		
+	}
+
+}
 </script>
