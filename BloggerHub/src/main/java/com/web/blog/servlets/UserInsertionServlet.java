@@ -70,7 +70,7 @@ public class UserInsertionServlet extends HttpServlet {
 						is.read(data);
 //						request.get
 						String path =  getServletContext().getRealPath("/") + "img" + File.separator + Filename;
-						System.out.println(path);
+//						System.out.println(path);
 						
 						FileOutputStream fos = new FileOutputStream(path);
 						

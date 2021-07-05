@@ -60,9 +60,11 @@ public class UserEditServlet extends HttpServlet {
 			if (!oldpic.equals(filename) && filename.length() != 0)
 				user.setPicture(filename);
 			user.setAbout(About);
-			System.out.println(user.getFirst_Name() + " * " + user.getLast_Name() + " * " + user.getEmail() + " * "
-					+ user.getPassword() + " * " + user.getGender() + " * " + " " + user.getPicture() + " * "
-					+ user.getAbout());
+			
+//			System.out.println(user.getFirst_Name() + " * " + user.getLast_Name() + " * " + user.getEmail() + " * "
+//					+ user.getPassword() + " * " + user.getGender() + " * " + " " + user.getPicture() + " * "
+//					+ user.getAbout());
+//			
 			UserEditDAO dao = new UserEditDAO(Connector.getConnection());
 			if (dao.editUser(user)) {
 				if (!oldpic.equals(filename) && filename.length() != 0) {
@@ -73,9 +75,15 @@ public class UserEditServlet extends HttpServlet {
 					is.read(data);
 //					request.get
 					String path = getServletContext().getRealPath("/") + "img" + File.separator + filename;
-					System.out.println(path);
+//					System.out.println(path);
 
 					FileOutputStream fos = new FileOutputStream(path);
+					
+					if(!oldpic.equals("default.jpeg")) {
+						String oldpath = getServletContext().getRealPath("/") + "img" + File.separator + oldpic;
+						File f = new File(oldpath);
+						f.delete();
+					}
 
 					fos.write(data);
 					fos.close();
