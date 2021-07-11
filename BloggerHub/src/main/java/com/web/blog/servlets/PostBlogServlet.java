@@ -1,4 +1,3 @@
-
 package com.web.blog.servlets;
 
 import java.io.File;
@@ -57,12 +56,12 @@ public class PostBlogServlet extends HttpServlet {
 			User u = (User) s.getAttribute("currentuser");
 			int uid = u.getId();
 
-			Post post = new Post(title, cid, content, title, uid);
+			Post post = new Post(title, cid, content, picture, uid);
 
 			PostBlogDAO dao = new PostBlogDAO(Connector.getConnection());
 
 			if (dao.post(post)) {
-				String path = getServletContext().getRealPath("/") + "img" + File.separator + title;
+				String path = getServletContext().getRealPath("/") + "img" + File.separator + picture;
 				ImageSaver.savefile(part.getInputStream(), path);
 				out.println("done");
 			} else
